@@ -8,7 +8,7 @@ class Auth:
         self.host = host
         self.access_token = access_token
 
-    async def request(self, method: str, path: str, **kwargs):
+    def request(self, method: str, path: str, **kwargs):
         """Make a request."""
                 
         if(method == "get"):
