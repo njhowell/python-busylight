@@ -1,5 +1,3 @@
-from typing import List
-
 from .Auth import Auth
 from .Light import Light
 
