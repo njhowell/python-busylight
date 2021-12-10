@@ -14,12 +14,12 @@ class Light:
     @property
     def id(self) -> int:
         """Return the ID of the light."""
-        return self.raw_data["id"]
+        return 1
 
     @property
     def name(self) -> str:
         """Return the name of the light."""
-        return self.raw_data["name"]
+        return "busylight"
 
     @property
     def is_on(self) -> bool:
