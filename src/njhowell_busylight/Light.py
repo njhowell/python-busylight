@@ -45,14 +45,14 @@ class Light:
             "post", url
         )
         resp.raise_for_status()
-        json = await resp.json()
+        json = resp.json()
         self.raw_data["is_on"] = is_on
 
     async def async_update(self):
         """Update the light data."""
         resp = await self.auth.request("get", f"status")
         resp.raise_for_status()
-        self.raw_data = await resp.json()
+        self.raw_data = resp.json()
 
     async def async_busy(self):
         """Set the light to busy"""

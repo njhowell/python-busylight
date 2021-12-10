@@ -13,4 +13,4 @@ class BusyLightAPI:
         """Return the light."""
         resp = await self.auth.request("get", f"status")
         resp.raise_for_status()
-        return Light(await resp.json(), self.auth)
+        return Light(resp.json(), self.auth)
