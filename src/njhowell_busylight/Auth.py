@@ -1,18 +1,16 @@
-import requests
+from aiohttp import ClientSession, ClientResponse
 
 class Auth:
     """Class to make authenticated requests."""
 
-    def __init__(self, host: str, access_token: str):
+    def __init__(self, websession: ClientSession, host: str):
         """Initialize the auth."""
         self.host = host
-        self.access_token = access_token
+        self.websession = websession
 
-    def request(self, method: str, path: str, **kwargs):
+    async def request(self, method: str, path: str, **kwargs) -> ClientResponse:
         """Make a request."""
-                
-        if(method == "get"):
-            return requests.get(f"{self.host}/{path}")
-        
-        if(method == "post"):
-            return requests.post(f"{self.host}/{path}", **kwargs)
+
+        return await self.websession.request(
+            method, f"{self.host}/{path}", **kwargs,
+        )

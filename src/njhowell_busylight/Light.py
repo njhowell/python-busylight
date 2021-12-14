@@ -1,6 +1,5 @@
 from .Auth import Auth
 
-
 class Light:
     """Class that represents a Light object in the ExampleHub API."""
 
@@ -34,37 +33,37 @@ class Light:
         """Return the status of the light"""
         return self.raw_data["status"]
 
-    def control(self, is_on: bool):
+    async def async_control(self, is_on: bool):
         """Control the light."""
         if(is_on):
             url = "on"
         else:
             url = "off"        
 
-        resp = self.auth.request(
+        resp = await self.auth.request(
             "post", url
         )
         resp.raise_for_status()
-        json = resp.json()
+        json = await resp.json()
         self.raw_data["is_on"] = is_on
 
-    def update(self):
+    async def async_update(self):
         """Update the light data."""
-        resp = self.auth.request("get", f"status")
+        resp = await self.auth.request("get", f"status")
         resp.raise_for_status()
-        self.raw_data = resp.json()
+        self.raw_data = await resp.json()
 
-    def busy(self):
+    async def async_busy(self):
         """Set the light to busy"""
-        resp = self.auth.request("get", f"busy")
+        resp = await self.auth.request("get", f"busy")
         resp.raise_for_status()
 
-    def available(self):
+    async def async_available(self):
         """set the light to available"""
-        resp = self.auth.request("get", f"available")
+        resp = await self.auth.request("get", f"available")
         resp.raise_for_status()
         
-    def switch(self, red: int, green: int, blue: int):
+    async def async_switch(self, red: int, green: int, blue: int):
         """Set light to specific colour"""
-        resp = self.auth.request("post", f"switch",json={"red": red, "green": green, "blue": blue})
+        resp = await self.auth.request("post", f"switch",json={"red": red, "green": green, "blue": blue})
         resp.raise_for_status()
